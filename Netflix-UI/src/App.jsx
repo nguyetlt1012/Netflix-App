@@ -1,15 +1,20 @@
-import Home from "./Pages/Home/Home";
-import Login from "./Pages/Login/Login";
-import Register from "./Pages/Register/Register";
-import Watch from "./Pages/Watch/Watch";
 import {
-  Routes,
-  Route,
-  Navigate,
+  Navigate, Route, Routes
 } from "react-router-dom";
+import HomeAdmin from "./Admin/pages/home/Home";
+import User from "./Admin/pages/user/User";
 import "./app.scss";
+import Home from "./Client/Pages/Home/Home";
+import Login from "./Client/Pages/Login/Login";
+import Register from "./Client/Pages/Register/Register";
+import Watch from "./Client/Pages/Watch/Watch";
+import ProductList from "./Admin/pages/productList/ProductList"
+
+
 const App = () => {
-  const user = true;
+  const user = false;
+  
+  
   return (
     <Routes>
       <Route path="/" element={user ? <Home /> : <Navigate to="/register" />} />
@@ -26,6 +31,12 @@ const App = () => {
           <Route path="/watch" element={<Watch />} />
         </>
       )}
+      <Route path="/admin">
+        
+        <Route index element ={<HomeAdmin/>}/>
+        <Route path="users" element={<User/>}/>
+        <Route path="movies" element={<ProductList/>}/>
+      </Route>
     </Routes>
   );
 };

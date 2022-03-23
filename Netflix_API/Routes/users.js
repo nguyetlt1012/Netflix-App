@@ -62,7 +62,7 @@ router.get("/", verify, async (req, res) => {
     if (req.user.isAdmin) {
       try {
         const users = query
-          ? await User.find().sort({ _id: -1 }).limit(2) // _id: -1 lay tu duoi len , _id: 1 la lay tu tren xuong 
+          ? await User.find().sort({ _id: -1 }).limit(5) // _id: -1 lay tu duoi len , _id: 1 la lay tu tren xuong 
           : await User.find();
         res.status(200).json(users);
       } catch (err) {
@@ -90,8 +90,7 @@ router.get("/stats", async (req, res) =>{
             },
             {
                 $group: {
-                    _id: { 
-                        month: "$month",},
+                    _id: "$month",
                     total: { $sum: 1},
                 },
             },
